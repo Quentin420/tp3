@@ -12,7 +12,7 @@ class Publication extends React.Component{
 	render(){
 		return(
 			<div className="Publication">
-			<p>{this.props.publication.contenu}</p>
+			<p>{this.state.contenu}</p>
 			</div>
 			);
 	}

@@ -6,14 +6,19 @@ import './Profil.css';
 
 
 class Profil extends React.Component{
+	constructor(props)
+	{
+		super(props);
+		this.state = {
+			prenom: this.props.prenom
+		}
+		
+	}
+
 	render(){
 		return(
-			<div className="Profil">
-				<Infos infos={this.props.infos}/>
-				<Publication publication={this.props.publication}/>
-			</div>
-
-		);
+			<button>{this.state.prenom}</button>
+			)
 	}
 
 }
