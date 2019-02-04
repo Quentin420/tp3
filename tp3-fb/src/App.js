@@ -103,9 +103,16 @@ class App extends Component {
   }*/
 
   handleClick(e,f,g,h,i,j){
+
     this.setState({
       actif:{prenom:e,nom:f,naissance:g,image:h,bgcolor:i,contenu:j}
-    })   
+    }) 
+  }
+
+  filtre(membres){
+    var lucky = membres.filter(function(membre) {
+  return membre.prenom==="Jeanne" ;
+}); 
   }
    
 
@@ -116,6 +123,7 @@ class App extends Component {
         <button  onClick={()=>{this.handleClick("Martine","Aubry","500",martine,"white","Une publication M")}}>Martine</button>
         <button  onClick={()=>{this.handleClick("Claude","François","1800",claude,"white","Une publication C")}}>Claude</button>
         <p>{this.state.actif.nom}{this.state.actif.prenom}</p>
+        {this.filtre(this.state.membres)}
         {this.renderProfil(this.state.membres)}
         {this.renderInfos(this.state.membres)}
         {this.renderPublication(this.state.membres)} 
