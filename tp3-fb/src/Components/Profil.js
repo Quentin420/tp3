@@ -17,7 +17,7 @@ class Profil extends React.Component{
 
 	render(){
 		return(
-			<button>{this.state.prenom}</button>
+			<button onClick={this.props.onClick}>{this.state.prenom}</button>
 			)
 	}
 

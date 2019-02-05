@@ -6,17 +6,14 @@ class Infos extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
-			prenom:this.props.prenom,
-			nom:this.props.nom,
-			naissance:this.props.naissance,
-			image: this.props.image,
+			
 			bgcolor: this.props.bgcolor,
 		};
 	}
 
 	 boxClick = (e) => {
     this.setState({
-      bgcolor: "green"
+      bgcolor: "red"
     })
   }
   
@@ -24,10 +21,9 @@ class Infos extends React.Component{
 	render(){
 		return(
 			<div className="Infos" style={{backgroundColor: this.state.bgcolor}}>
-			
-			<img className="image" src={this.state.image}/>
-			<p>{this.state.prenom} {this.state.nom}</p>
-			<p>{this.state.naissance}</p>
+			<img className="image" src={this.props.image}/>
+			<p>{this.props.prenom} {this.props.nom}</p>
+			<p>{this.props.naissance}</p>
 			<button className="button" onClick={this.boxClick}>Change style</button>
 			</div>
 			);

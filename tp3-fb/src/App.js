@@ -14,13 +14,16 @@ class App extends Component {
     super(props);
     this.state = {
        membres: [
-           { id: 1, prenom: 'Jeanne', nom: 'Agacci', naissance:"1990", image:jeanne, bgcolor:'white', contenu:"Une publication J"},
-           { id: 2, prenom: 'Martine', nom: 'Aubry', naissance:"500", image:martine, bgcolor:'white', contenu:"Une publication M"},
-           { id: 3, prenom: 'Claude', nom: 'François', naissance:"1800", image:claude, bgcolor:'white', contenu:"Une publication C"}
+           { id: 1, prenom: 'Jeanne', nom: 'Agacci', naissance:"1990", image:jeanne, bgcolor:'white', contenu:"Je suis Jeanne"},
+           { id: 2, prenom: 'Martine', nom: 'Aubry', naissance:"500", image:martine, bgcolor:'white', contenu:"Je suis Martine"},
+           { id: 3, prenom: 'Claude', nom: 'François', naissance:"1800", image:claude, bgcolor:'white', contenu:"J'étais Claude"}
          ],
-      actif:[{id:1, prenom: "Jeanne", nom: 'Agacci', naissance:"1990", image:jeanne, bgcolor:'white', contenu:"Une publication J"}]
+      actif:1
    }
   }
+
+  //Props : c'est l'élement qui est reçu
+  //State :c'est l'élement qui est crée a l'intérieur
 
   renderProfil(membres){  
     return(
@@ -28,102 +31,54 @@ class App extends Component {
           {this.state.membres.map((membres) => (
             <Profil
              prenom={membres.prenom} 
+             onClick={() => this.handleClick(membres.id)}
               />
           ))}
         </div>  
       );
   }
 
-  /**renderProfil(actif){  
-    return(
-        <div>         
-          {this.state.actif.map((actif) => (
-            <Profil
-             prenom={actif.prenom} 
-              />
-          ))}
-        </div>  
-      );
-  }*/
-
   renderInfos(membres){  
-    return(
-        <div>
-          {this.state.membres.map((membres) => (
-            <Infos
+    let disp;
+
+    {this.state.membres.map((membres) => {
+      if(membres.id===this.state.actif){
+        disp = <Infos
              prenom={membres.prenom} 
              nom={membres.nom}
              naissance={membres.naissance}
              image={membres.image}
              bgcolor={membres.bgcolor}
               />
-          ))}
-        </div>  
-      );
+          }})}
+      
+            
+    return disp;
   }
-
-  /**renderInfos(actif){  
-    return(
-        <div>
-          {this.state.actif.map((actif) => (
-            <Infos
-             prenom={actif.prenom} 
-             nom={actif.nom}
-             naissance={actif.naissance}
-             image={actif.image}
-             bgcolor={actif.bgcolor}
-              />
-          ))}
-        </div>  
-      );
-  }*/
 
   renderPublication(membres){  
-    return(
-        <div>
-          {this.state.membres.map((membres) => (
-            <Publication
-             contenu={membres.contenu} 
+    let disp;
+    {this.state.membres.map((membres) => {
+      if(membres.id===this.state.actif){
+        disp = <Publication
+             contenu={membres.contenu}
               />
-          ))}
-        </div>  
-      );
+          }})}        
+    return disp;
   }
 
-  /**renderPublication(actif){  
-    return(
-        <div>
-          {this.state.actif.map((actif) => (
-            <Publication
-             contenu={actif.contenu} 
-              />
-          ))}
-        </div>  
-      );
-  }*/
-
-  handleClick(e,f,g,h,i,j){
+  handleClick(e){
 
     this.setState({
-      actif:{prenom:e,nom:f,naissance:g,image:h,bgcolor:i,contenu:j}
-    }) 
-  }
+      actif:e
+    }
+    ) 
 
-  filtre(membres){
-    var lucky = membres.filter(function(membre) {
-  return membre.prenom==="Jeanne" ;
-}); 
-  }
-   
+  }   
 
   render() {
     return (
-      <div className="App">
-        <button  onClick={()=>{this.handleClick("Jeanne","Agacci","1990",jeanne,"white","Une publication J")}}>Jeanne</button>
-        <button  onClick={()=>{this.handleClick("Martine","Aubry","500",martine,"white","Une publication M")}}>Martine</button>
-        <button  onClick={()=>{this.handleClick("Claude","François","1800",claude,"white","Une publication C")}}>Claude</button>
-        <p>{this.state.actif.nom}{this.state.actif.prenom}</p>
-        {this.filtre(this.state.membres)}
+      <div className="App">        
         {this.renderProfil(this.state.membres)}
         {this.renderInfos(this.state.membres)}
         {this.renderPublication(this.state.membres)} 
